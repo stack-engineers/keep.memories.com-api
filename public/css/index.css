@@ -1,0 +1,56 @@
+* {
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    box-sizing: border-box;
+    transition: all 500ms;
+}
+
+body {
+    background-color: hsl(0, 0%, 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+section[class="FourOFour"] {
+    height: 100vh;
+    width: min(100%, 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+section[class="FourOFour"] > h1 {
+    font-size: 3em;
+}
+
+/*  */
+section[class="home-page"] {
+    height: 100vh;
+    width: min(100%, 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1em;
+    text-align: center;
+}
+section[class="home-page"] > h1 {
+    font-size: 2em;
+    color: hsl(0, 0%, 20%);
+    font-weight: normal;
+}
+section[class="home-page"] > a {
+    font-size: 1em;
+    font-weight: normal;
+    color: hsl(0, 0%, 20%);
+}
+section[class="home-page"] > a:is(:hover) {
+    color: rebeccapurple;
+}
+img {
+    aspect-ratio: 16/9;
+    width: 20em;
+}
