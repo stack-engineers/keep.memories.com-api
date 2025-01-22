@@ -9,8 +9,10 @@ const cookieParser = require("cookie-parser");
 const { v4: uuid } = require("uuid");
 console.log(uuid());
 require("dotenv").config();
-// require("dotenv").configDotenv(); // This line is not needed
-const cache = require("apicache");
+require("dotenv").configDotenv(); // This line is not needed
+const apicache = require("apicache");
+const cache = apicache.middleware;
+
 const cors = require("cors");
 const origins = [
     "https://keep-memories.netlify.app"
@@ -49,7 +51,7 @@ app.set("port", Number(parseInt(3500)));
 app.use(bodyParser.urlencoded({ extended: Boolean(false) }));
 app.use(bodyParser.json());
 
-app.use("/resources", cache.middleware("5 minutes"), require("../routers/resources.router.controller"));
+app.use("/resources", cache("5 minutes"), require("../routers/resources.router.controller"));
 app.use("/", require("../routers/root.router.controller"));
 app.all("*", require("../middleware/error/404.middleware.controller"));
 // app.use(require("../middleware/error/404.middleware.controller")); // This line is duplicate

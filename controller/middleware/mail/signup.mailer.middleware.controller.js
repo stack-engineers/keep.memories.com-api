@@ -1,6 +1,7 @@
 "use strict";
 require("dotenv").config();
 require("dotenv").configDotenv();
+const model_connection = require("../../../model/connection/model.connection");
 
 const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({
@@ -15,12 +16,17 @@ const transporter = nodemailer.createTransport({
 
 module.exports = async function (to, subject) {
     try {
+        const code = Math.floor(100000 + Math.random() * 900000);
+        // save code 
+        await model_connection.query(`
+            INSERT INTO verification_codes (email, code) VALUES (?, ?)
+            `, [to, code]);
+
         await transporter.sendMail({
             to: to,
             subject: subject,
             html: `
-                <p>This is your email verification code 
-                <strong>${JSON.stringify(Math.floor(Math.random() * 15235))}</strong>
+                <p>Thank you for creating up an account for our gallery. This is your email verification code <strong>${JSON.stringify(code)}</strong>. Use it to verify your account. 
                 </p>
                 <p>Thank you!</p> 
                 `

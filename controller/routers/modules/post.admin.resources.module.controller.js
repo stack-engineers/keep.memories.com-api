@@ -18,7 +18,6 @@ module.exports = async function (request, response) {
             return index.resource_url === resource;
         });
 
-        console.log(FoundAdmin)
         if (FoundResource) {
             response.status(Number(parseInt(400)))
                 .jsonp({

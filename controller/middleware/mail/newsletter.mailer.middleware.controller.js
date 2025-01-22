@@ -20,7 +20,7 @@ module.exports = async function (to, subject, message) {
             subject: subject,
             text: message,
             html: `
-                <p>Email address ${to} has been used to subscribe to keep memories photos gallery weekly newsletter. Thank you for your cooperation with us.</p>
+                <p>Email address ${to} has been used to subscribe to keep memories photos gallery newsletter. Thank you for your cooperation with us.</p>
                 <p>Keep memories photo gallery developer <a href="https://robertsims.netlify.app" target="_blank">robert sims</a></p>
                 <br>
                 <p>Thank you.</p>
