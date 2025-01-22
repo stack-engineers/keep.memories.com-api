@@ -49,8 +49,8 @@ router.route("/").post(async (request, response) => {
                 INSERT INTO admins (admin_id, admin_email, admin_password, date, admin_username) VALUES (?, ?, ?, ?, ?)
             `, [admin_id, email, hash, date, username]);
 
-            await mailer(
-                email, "Account Verification Code", ""
+            mailer(
+                email, "Account Verification Code"
             );
 
             response.status(Number(parseInt(201)))
