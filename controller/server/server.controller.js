@@ -63,3 +63,5 @@ ee.on("running", () => console.log("express server started"));
 server.listen(app.get("port") || process.env.PORT, () => {
     server.listening ? ee.emit("running") : console.log("server not running!");
 });
+
+module.exports = app;

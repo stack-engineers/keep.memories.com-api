@@ -21,7 +21,7 @@ module.exports = async function (request, response, next) {
         } else if (!token || typeof token === "undefined") {
             response.status(Number(parseInt(401)))
                 .jsonp({
-                    message: "token is undefined or not provide!"
+                    message: "token is undefined or not provided!"
                 });
         } else if (!FoundUser[0]?.length || !FoundUser[0].length === Number(parseInt(0))) {
             response.status(Number(parseInt(404)))
@@ -35,7 +35,7 @@ module.exports = async function (request, response, next) {
     } catch (error) {
         response.status(Number(parseInt(401)))
             .jsonp({
-                message: "token is undefined or not provide!"
+                message: "token is undefined or not provided!"
             });
     }
 };

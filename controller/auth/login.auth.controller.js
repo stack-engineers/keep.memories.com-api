@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 require("dotenv").configDotenv();
 const mailer = require("../middleware/mail/login.mailer.middleware.controller");
+const { v4: uuid } = require("uuid");
 const format = require("date-fns").format;
 
 router.route("/").post(async (request, response) => {
@@ -50,10 +51,11 @@ router.route("/").post(async (request, response) => {
             );
             response.status(Number(parseInt(200)))
                 .jsonp({
+                    login_id: uuid(),
                     username: admin_username,
                     email: admin_email,
                     token: token,
-                    message: "Authenticating in progress...",
+                    message: "Please wait, authentication in progress...",
                     status: "Logged in",
                     signedUp: Boolean(true),
                     date: format(new Date(), "MM/ddd/yyyy\tHH:mm:ss")

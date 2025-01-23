@@ -21,7 +21,7 @@ router.route("/").post(async (request, response) => {
         if (DuplicateAdminEmail[0]?.length) {
             response.status(Number(parseInt(400)))
                 .jsonp({
-                    message: "Email already in use!"
+                    message: `The email your are trying to use is already in use!`
                 });
         } else if (!username || !email || !password) {
             response.status(Number(parseInt(400)))
@@ -55,7 +55,7 @@ router.route("/").post(async (request, response) => {
 
             response.status(Number(parseInt(201)))
                 .jsonp({
-                    message: "Admin has been registered."
+                    message: "Admin account has been registered successfully!"
                 });
         }
     } catch (error) {

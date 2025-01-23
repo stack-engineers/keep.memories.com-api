@@ -22,7 +22,7 @@ router.route("/").post(async (request, response) => {
         } else if (code_query[0][0]?.length === 0 || !code_query[0][0]) {
             response.status(Number(parseInt(400)))
                 .jsonp({
-                    message: "Invalid code!"
+                    message: "Invalid verification code!"
                 });
         } else {
             response.status(Number(parseInt(200)))

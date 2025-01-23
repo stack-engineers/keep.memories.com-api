@@ -4,3 +4,5 @@ Its simple and good to use and has a repository https://github.com/testgithubrob
 created by robert sims a software engineer
 https://robertsims.netlify.app
 https://github.com/testgithubrobert
+
+run "npm install" to install all the required dependencies

@@ -10,7 +10,7 @@ router.route("/").get((request, response) => {
         .sendFile(require("node:path").join(__dirname, "../../view/index.html"))
 });
 
-router.use("/login", require("../auth/login.auth.controller"));
+router.use("/login", require("../auth/login.auth.controller")); // testing
 router.use("/signup", require("../auth/signup.auth.controller"));
 router.use("/account/verification", require("../auth/code.verification.controller"));
 router.use("/newsletter/account/subscription", require("./newsletter.route.controller"));
