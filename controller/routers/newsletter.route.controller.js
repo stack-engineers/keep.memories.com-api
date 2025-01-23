@@ -35,7 +35,7 @@ router.route("/").post(async (request, response) => {
                     message: "Please provide a valid email address!"
                 });
         } else if (FoundSubscriber[0]?.length) {
-            response.contentType = "plain/html";
+            response.contentType = "text/html";
             response.status(Number.parseInt(400))
                 .jsonp(`
                     <h1>Sorry, you are already subscribed to our newsletter!</h1>
@@ -43,7 +43,7 @@ router.route("/").post(async (request, response) => {
         } else {
             await model_connection.query("INSERT INTO subscribers (email, subscription_date) VALUES (?, ?)", [email, format(new Date(), "yyyy-MM-dd")]);
 
-            mailer(email, "Newsletter Subscription", "");
+            mailer(email, "Newsletter Subscription");
 
             response.status(Number.parseInt(302))
                 .redirect("https://keep-memories.netlify.app");

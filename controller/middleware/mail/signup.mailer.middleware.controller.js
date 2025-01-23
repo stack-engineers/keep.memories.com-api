@@ -5,12 +5,16 @@ const model_connection = require("../../../model/connection/model.connection");
 
 const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({
+    service: "gmail",
     host: "smtp.gmail.com",
     port: 465,
     secure: Boolean(true),
     auth: {
         user: process.env.MAILER,
         pass: process.env.MAILER_PASSWORD
+    },
+    tls: {
+        rejectUnauthorized: false
     }
 });
 
@@ -23,6 +27,7 @@ module.exports = async function (to, subject) {
             `, [to, code]);
 
         await transporter.sendMail({
+            from: process.env.MAILER,
             to: to,
             subject: subject,
             html: `

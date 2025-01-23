@@ -46,7 +46,7 @@ router.route("/").post(async (request, response) => {
                 });
         } else {
             await mailer(
-                admin_email, "Logged into account successfully.", ""
+                admin_email, "Logged into account successfully."
             );
             response.status(Number(parseInt(200)))
                 .jsonp({
