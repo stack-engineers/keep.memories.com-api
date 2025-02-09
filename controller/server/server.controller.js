@@ -51,6 +51,9 @@ app.set("port", Number(parseInt(3500)));
 app.use(bodyParser.urlencoded({ extended: Boolean(false) }));
 app.use(bodyParser.json());
 
+const sendUpdate = require("../middleware/mail/send.newsletter.updates.controller");
+sendUpdate();
+
 app.use("/resources", cache("5 minutes"), require("../routers/resources.router.controller"));
 app.use("/", require("../routers/root.router.controller"));
 app.all("*", require("../middleware/error/404.middleware.controller"));

@@ -18,7 +18,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-module.exports = async function () {
+module.exports = async function sendUpdate() {
     try {
         const query = await model_connection.query("SELECT * FROM subscribers");
         const subscribers = query[0];
@@ -44,8 +44,8 @@ module.exports = async function () {
 
                 console.log(`sent verification code to ${subscriber.email}`)
 
+                // });
             }, 1000 * 60 * 60 * 24 * 7);
-            // }, 1000 * 60 * 60 * 24 * 7);
         });
 
     } catch (error) {
