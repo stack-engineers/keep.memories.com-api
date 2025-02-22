@@ -1,9 +1,11 @@
 "use strict";
+debugger;
 require("dotenv").config();
 require("dotenv").configDotenv();
 const model_connection = require("../../../model/connection/model.connection");
-
 const nodemailer = require("nodemailer");
+const { format } = require("date-fns");
+
 const transporter = nodemailer.createTransport({
     service: "gmail",
     host: "smtp.gmail.com",
@@ -31,7 +33,8 @@ module.exports = async function (to, subject) {
             to: to,
             subject: subject,
             html: `
-                <p>Thank you for creating up an account for our gallery. This is your email verification code <strong>${JSON.stringify(code)}</strong>. Use it to verify your account. 
+                <strong>${format(new Date(), "MM/ddd/yyyy\tHH:mm:ss")}</strong>
+                <p>Thank you for creating up an account for our gallery. This is your email verification code <strong>${JSON.stringify(code)}</strong> for your account. Copy and use it to verify your account. 
                 </p>
                 <p>Thank you!</p> 
                 `

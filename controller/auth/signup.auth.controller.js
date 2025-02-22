@@ -1,4 +1,5 @@
 "use strict";
+debugger;
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
@@ -11,13 +12,14 @@ const mailer = require("../middleware/mail/signup.mailer.middleware.controller")
 router.route("/").post(async (request, response) => {
     response.statusCode = Number(parseInt(201));
     response.setHeader("Content-Type", "Application/json");
-    let { username, email, password } = request.body;
-
-    const DuplicateAdminEmail = await model_connection.query(`
-        SELECT admin_email AS email FROM admins WHERE admin_email = ?
-    `, [email]);
 
     try {
+        let { username, email, password } = request.body;
+
+        const DuplicateAdminEmail = await model_connection.query(`
+            SELECT admin_email AS email FROM admins WHERE admin_email = ?
+        `, [email]);
+
         if (DuplicateAdminEmail[0]?.length) {
             response.status(Number(parseInt(400)))
                 .jsonp({
@@ -31,7 +33,7 @@ router.route("/").post(async (request, response) => {
         } else if (!validator.isEmail(email)) {
             response.status(Number(parseInt(400)))
                 .jsonp({
-                    message: "Invalid email address!"
+                    message: "Invalid email address provided!"
                 });
         } else if (!validator.isStrongPassword(password)) {
             response.status(Number(parseInt(400)))
@@ -55,7 +57,8 @@ router.route("/").post(async (request, response) => {
 
             response.status(Number(parseInt(201)))
                 .jsonp({
-                    message: "Admin account has been registered successfully!"
+                    message: "Admin account has been registered successfully!",
+                    date: format(new Date(), "MM/dd/yyyy\tHH:mm:ss")
                 });
         }
     } catch (error) {

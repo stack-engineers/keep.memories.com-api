@@ -1,4 +1,5 @@
 "use strict";
+debugger;
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
@@ -11,11 +12,11 @@ const { v4: uuid } = require("uuid");
 const format = require("date-fns").format;
 
 router.route("/").post(async (request, response) => {
-    response.statusCode = Number(parseInt(201));
+    response.statusCode = Number(parseInt(200));
     response.setHeader("Content-Type", "Application/json");
-    let { email, password } = request.body;
 
     try {
+        let { email, password } = request.body;
         const query = await model_connection.query("SELECT * FROM admins WHERE admin_email = ?", [email]);
 
         const FoundAdmin = query[0][0]
@@ -38,7 +39,7 @@ router.route("/").post(async (request, response) => {
         } else if (!PasswordMatch || PasswordMatch === Boolean(false)) {
             response.status(Number(parseInt(400)))
                 .jsonp({
-                    message: "Incorrect Password!"
+                    message: "Incorrect password provided!"
                 });
         } else if (!email || !password) {
             response.status(Number(parseInt(400)))
@@ -47,22 +48,23 @@ router.route("/").post(async (request, response) => {
                 });
         } else {
             await mailer(
-                admin_email, "Logged into account successfully."
+                admin_email, "New Account Login."
             );
+
             response.status(Number(parseInt(200)))
                 .jsonp({
                     login_id: uuid(),
                     username: admin_username,
                     email: admin_email,
                     token: token,
-                    message: "Please wait, authentication in progress...",
+                    message: "Logged into account successfully!",
                     status: "Logged in",
                     signedUp: Boolean(true),
                     date: format(new Date(), "MM/ddd/yyyy\tHH:mm:ss")
                 });
         }
     } catch (error) {
-        response.status(Number(parseInt(404)))
+        response.status(Number(parseInt(400)))
             .jsonp({
                 message: "No such admin with email was found!"
             });

@@ -1,4 +1,5 @@
 "use strict";
+debugger;
 const express = require("express");
 const router = express();
 const format = require("date-fns").format;
@@ -6,8 +7,6 @@ const { v5: uuid } = require("uuid");
 const validator = require("validator");
 const mailer = require("../middleware/mail/newsletter.mailer.middleware.controller");
 const model_connection = require("../../model/connection/model.connection");
-const sendUpdates = require("../middleware/mail/send.newsletter.updates.controller");
-sendUpdates();
 
 router.route("/").post(async (request, response) => {
     response.contentType = "Application/json";

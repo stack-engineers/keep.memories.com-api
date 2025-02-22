@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage",
+    "jest": "jest --coverage",
+    "test": "vitest",
+    "vitest": "vitest",
     "dev": "nodemon ./controller/server/server.controller.js",
     "start": "node ./controller/server/server.controller.js",
     "build": "npm run build"
@@ -16,6 +18,7 @@
     "apicache": "^1.6.3",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.3",
+    "compression": "^1.8.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "date-fns": "^4.1.0",
@@ -32,7 +35,8 @@
   "devDependencies": {
     "jest": "^29.7.0",
     "nodemon": "^3.1.9",
-    "supertest": "^7.0.0"
+    "supertest": "^7.0.0",
+    "vitest": "^3.0.6"
   },
   "repository": {
     "type": "git",

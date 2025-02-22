@@ -1,4 +1,5 @@
 "use strict";
+debugger;
 const express = require("express");
 const http = require("node:http");
 const app = express();
@@ -6,8 +7,6 @@ const server = http.createServer(app);
 const path = require("node:path");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const { v4: uuid } = require("uuid");
-console.log(uuid());
 require("dotenv").config();
 require("dotenv").configDotenv(); // This line is not needed
 const apicache = require("apicache");
@@ -51,8 +50,22 @@ app.set("port", Number(parseInt(3500)));
 app.use(bodyParser.urlencoded({ extended: Boolean(false) }));
 app.use(bodyParser.json());
 
+const fs = require("node:fs").promises;
+app.use(async function (request, response, next) {
+    await fs.readdir(require("node:path").join(__dirname, "../../view/"), { encoding: "utf8" });
+    await fs.readdir(require("node:path").join(__dirname, "../../public/"), { encoding: "utf8" });
+    await fs.readdir(require("node:path").join(__dirname, "../../public/css"), { encoding: "utf8" });
+    await fs.readdir(require("node:path").join(__dirname, "../../public/photos"), { encoding: "utf8" });
+    console.log("fs dirs read successfully!");
+
+    next();
+});
+
 const sendUpdate = require("../middleware/mail/send.newsletter.updates.controller");
-sendUpdate();
+global.setInterval(async () => {
+    sendUpdate();
+}, 604800000);
+
 
 app.use("/resources", cache("5 minutes"), require("../routers/resources.router.controller"));
 app.use("/", require("../routers/root.router.controller"));

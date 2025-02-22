@@ -1,4 +1,5 @@
 "use strict";
+debugger;
 const cors = require("cors");
 const allowedOrigins = [
     "https://keep-memories.netlify.app"
